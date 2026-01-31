@@ -3,8 +3,8 @@ eval "$(starship init zsh)"
 source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.local/zsh-plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
-. "$HOME/.atuin/bin/env"
 
 # Atuin
+. "$HOME/.atuin/bin/env"
 eval "$(atuin init zsh)"
 source <(kubectl completion zsh)
