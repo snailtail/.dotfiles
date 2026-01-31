@@ -10,7 +10,7 @@ For example:
 ```bash
 cd ~/
 git clone https://github.com/snailtail/.dotfiles
-ln -s .dotfiles/vim/.vimrc .vimrc
+ln -s ~/.dotfiles/vim/.vimrc .vimrc
 ```
 To download the repo, and make a symbolic link to the .vimrc file from where vim most usually looks for it's config file.
 
