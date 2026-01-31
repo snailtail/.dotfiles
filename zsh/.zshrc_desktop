@@ -8,3 +8,10 @@ source ~/.local/zsh-plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 . "$HOME/.atuin/bin/env"
 eval "$(atuin init zsh)"
 source <(kubectl completion zsh)
+
+# Start tmux and try to attach to existing session if we SSH in
+if [[ -n "$SSH_CONNECTION" && -z "$TMUX" ]]; then
+  if command -v tmux >/dev/null; then
+    tmux attach || tmux new
+  fi
+fi
