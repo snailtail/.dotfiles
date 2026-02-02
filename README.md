@@ -1,6 +1,15 @@
 # .dotfiles
 
 This is my .dotfiles repo where I save "dotfiles", usually meaning "hidden" configuration files for *nix based operating systems and tools therein.
+Assumptions:  
+- zsh is the shell  
+- you have git installed  
+- you are running macOS, Fedora, or Ubuntu WSL  
+If not, your mileage may vary - follow these instructions with care.  
+
+<DISCLAIMER>
+You should back up your config files before performing any of this, if not you might destroy existing files.
+</DISCLAIMER>
 
 ## Usage
 
