@@ -20,6 +20,7 @@ But in case you don't, just follow these instructions.
 #### Installation on macOS  
 
 ```sh
+# Install Vim
 brew install vim
 
 # Check version  
