@@ -19,15 +19,16 @@ But in case you don't, just follow these instructions.
 
 #### Installation on macOS  
 
-```zsh
+```sh
 brew install vim
-: Check version  
+
+# Check version  
 vim --version
 ```
 
 #### Fedora 
 
-```bash
+```sh
 # Update package list
 sudo dnf update -y
 
@@ -39,7 +40,7 @@ vim --version
 ```
 
 #### Ubuntu WSL
-```bash
+```sh
 # Uppdate package list
 sudo apt update
 
@@ -55,7 +56,7 @@ vim --version
 When you have vim installed you will probably want to clone this repo into your ~/ folder, and then add symlinks to each dotfile.
 
 For example:
-```bash
+```sh
 cd ~/
 git clone https://github.com/snailtail/.dotfiles
 ln -s ~/.dotfiles/vim/.vimrc .vimrc
@@ -75,20 +76,20 @@ This will also symlink the ~/.vim directory to the .dotfiles/vim folder, where t
 
 #### Ubuntu/WSL (apt)
 
-```bash
+```sh
 sudo apt update
 sudo apt install -y neovim 
 ```
 
 #### Fedora (dnf)
 
-```bash
+```sh
 sudo dnf install -y neovim 
 ```
 
 #### macOS (brew)
 
-```bash
+```sh
 brew install neovim 
 ```
 
