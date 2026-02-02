@@ -1,3 +1,6 @@
+# Enable interactive comments (accept lines starting with # in interactive terminal without complaining)
+setopt interactivecomments
+
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=110000
