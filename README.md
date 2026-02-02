@@ -7,9 +7,8 @@ Assumptions:
 - you are running macOS, Fedora, or Ubuntu WSL  
 If not, your mileage may vary - follow these instructions with care.  
 
-<DISCLAIMER>
-You should back up your config files before performing any of this, if not you might destroy existing files.
-</DISCLAIMER>
+> [!WARNING]
+> You should back up your config files before performing any of this, if not you might destroy existing files.
 
 ## Usage
 
