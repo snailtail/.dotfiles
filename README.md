@@ -4,7 +4,49 @@ This is my .dotfiles repo where I save "dotfiles", usually meaning "hidden" conf
 
 ## Usage
 
-You will probably want to clone this repo into your ~/ folder, and then add symlinks to each dotfile.
+### Vim  
+
+You probably already have vim if you're running macOS, Ubuntu or Fedora.  
+But in case you don't, just follow these instructions.  
+
+#### Installation on macOS  
+
+```bash
+brew install vim
+```
+#### Check version  
+```bash
+vim --version
+```
+
+#### Fedora 
+
+```bash
+# Update package list
+sudo dnf update -y
+
+# Install Vim
+sudo dnf install -y vim-enhanced
+
+# Check version
+vim --version
+```
+
+#### Ubuntu WSL
+```bash
+# Uppdate package list
+sudo apt update
+
+# Install Vim
+sudo apt install -y vim
+
+# Check version
+vim --version
+```
+
+### Config files
+
+When you have vim installed you will probably want to clone this repo into your ~/ folder, and then add symlinks to each dotfile.
 
 For example:
 ```bash
@@ -23,17 +65,7 @@ To download the repo, and make a symbolic link to the .vimrc file from where vim
 This will also symlink the ~/.vim directory to the .dotfiles/vim folder, where there are some colorscheme files and other stuff.  
 
 
-## Neovim specifics  
-
-In ~/.config/nvim/init.vim add this:  
-
-```bash
-if filereadable(expand("~/.vimrc"))
-  source ~/.vimrc
-endif
-```
-
-### Installation 
+### Installation of Neovim if needed 
 
 #### Ubuntu/WSL (apt)
 
