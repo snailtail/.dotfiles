@@ -1,3 +1,7 @@
+# Allow inline comments
+# For example if you paste a command from a code block in a markdown documentation file, there is usually some comments inbetween the actual lines of commands.
+setopt interactivecomments
+
 # Start Starship
 eval "$(starship init zsh)"
 source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
