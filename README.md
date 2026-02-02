@@ -11,19 +11,26 @@ For example:
 cd ~/
 git clone https://github.com/snailtail/.dotfiles
 ln -s ~/.dotfiles/vim/.vimrc .vimrc
+ln -s ~/.dotfiles/vim ~/.vim
+
+# If you intend to use Neovim:
+mkdir -p ~/.config
+ln -sfn ~/.dotfiles/nvim ~/.config/nvim
 ```
-To download the repo, and make a symbolic link to the .vimrc file from where vim most usually looks for it's config file.
+This should download the repo to your local client machine, and create symbolic links for some config files and/or directories for vim and neovim.  
+
+To download the repo, and make a symbolic link to the .vimrc file from where vim most usually looks for it's config file.  
+This will also symlink the ~/.vim directory to the .dotfiles/vim folder, where there are some colorscheme files and other stuff.  
 
 
 ## Neovim specifics  
 
-```bash
-# Backup existing nvim config 
-mv ~/.config/nvim ~/.config/nvim.bak.$(date +%Y%m%d_%H%M%S) 2>/dev/null || true
+In ~/.config/nvim/init.vim add this:  
 
-# länka neovim config-folder till dotfiles motsvarighet
-mkdir -p ~/.config
-ln -s ~/.dotfiles/nvim ~/.config/nvim
+```bash
+if filereadable(expand("~/.vimrc"))
+  source ~/.vimrc
+endif
 ```
 
 ### Installation 
@@ -32,28 +39,18 @@ ln -s ~/.dotfiles/nvim ~/.config/nvim
 
 ```bash
 sudo apt update
-sudo apt install -y neovim git curl ripgrep fd-find unzip
-```
-- ripgrep is needed for Telescope live grep
-- fd-find is needed for fast file search (on Ubuntu the binary is often called `fdfind`)
-
-Create alias for telescope to find fd:
-
-```bash
-mkdir -p ~/.local/bin
-ln -sf "$(command -v fdfind)" ~/.local/bin/fd
-echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
+sudo apt install -y neovim 
 ```
 
 #### Fedora (dnf)
 
 ```bash
-sudo dnf install -y neovim git curl ripgrep fd-find unzip
+sudo dnf install -y neovim 
 ```
 
 #### macOS (brew)
 
 ```bash
-brew install neovim git ripgrep fd
+brew install neovim 
 ```
 

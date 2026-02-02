@@ -23,7 +23,10 @@ filetype plugin indent on
 " ===========================
 
 " Färgschema
-colorscheme unokai
+set termguicolors
+colorscheme gruvbox
+set background=dark
+
 
 " Visar radnummer till vänster (1, 2, 3, ...)
 set number
