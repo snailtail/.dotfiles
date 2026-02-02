@@ -11,11 +11,9 @@ But in case you don't, just follow these instructions.
 
 #### Installation on macOS  
 
-```bash
+```zsh
 brew install vim
-```
-#### Check version  
-```bash
+: Check version  
 vim --version
 ```
 
