@@ -1,3 +1,6 @@
+" Map leader key
+let mapleader = " "
+
 " ==========================
 " Grundläggande kompabilitet
 " ==========================
@@ -107,6 +110,9 @@ nnoremap("<C-u>", "<C-u>zz")
 nnoremap("n", "nzzzv")
 nnoremap("N", "Nzzzv")
 
+" Remap next buffer to <leader>n
+nnoremap <leader>n :bnext<CR>
+nnoremap <leader>p :bprevious<CR>
 " I insert mode:
 " om du snabbt skriver 'jk' så går Vim till normal mode
 " (bekvämare än att sträcka sig till Esc hela tiden)
