@@ -101,6 +101,11 @@ set smartindent
 " =========================
 " Key mappings (små livsförbättringar)
 " =========================
+" auto centre on vertical motions like Control up, down, find next and so on
+nnoremap("<C-d>", "<C-d>zz")
+nnoremap("<C-u>", "<C-u>zz")
+nnoremap("n", "nzzzv")
+nnoremap("N", "Nzzzv")
 
 " I insert mode:
 " om du snabbt skriver 'jk' så går Vim till normal mode
