@@ -2,16 +2,31 @@
 # For example if you paste a command from a code block in a markdown documentation file, there is usually some comments inbetween the actual lines of commands.
 setopt interactivecomments
 
+autoload -Uz compinit
+compinit
+
 # Start Starship
 eval "$(starship init zsh)"
-source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/.local/zsh-plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#source ~/.local/zsh-plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
 # Atuin
-. "$HOME/.atuin/bin/env"
+#. "$HOME/.atuin/bin/env"
 eval "$(atuin init zsh)"
 source <(kubectl completion zsh)
+
+# ls aliases - eza makes it a lot nicer
+alias ls="eza --icons"
+alias ll="eza -la --icons --git"
+alias la="eza -a --icons"
+alias lt="eza --tree --icons --level=2"
+# navigation aliases
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+# some minor things
+alias nano="nvim"
 
 # Start tmux and try to attach to existing session if we SSH in
 if [[ -n "$SSH_CONNECTION" && -z "$TMUX" ]]; then
