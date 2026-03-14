@@ -2,6 +2,7 @@
 # For example if you paste a command from a code block in a markdown documentation file, there is usually some comments inbetween the actual lines of commands.
 setopt interactivecomments
 
+export PATH="$HOME/.local/bin:$PATH"
 autoload -Uz compinit
 compinit
 
@@ -34,8 +35,8 @@ source <(fzf --zsh)
 
 
 # Start tmux and try to attach to existing session if we SSH in
-if [[ -n "$SSH_CONNECTION" && -z "$TMUX" ]]; then
-  if command -v tmux >/dev/null; then
-    tmux attach || tmux new
-  fi
-fi
+# if [[ -n "$SSH_CONNECTION" && -z "$TMUX" ]]; then
+#   if command -v tmux >/dev/null; then
+#     tmux attach || tmux new
+#   fi
+# fi
