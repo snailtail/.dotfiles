@@ -1,5 +1,4 @@
 vim.opt.termguicolors = true
-vim.cmd.colorscheme("habamax")
 
 -- ============================================================================
 -- OPTIONS
@@ -30,6 +29,8 @@ vim.opt.showmatch = true -- highlights matching brackets
 vim.opt.hidden = true -- allow hidden buffers
 vim.opt.errorbells = false -- no error sounds
 
+vim.opt.clipboard = "unnamedplus" -- Använd systemklippbordet
+vim.opt.mouse = "a"               -- Musstöd (scroll, klicka etc.)
 
 -- ============================================================================
 -- KEYMAPS
@@ -37,56 +38,104 @@ vim.opt.errorbells = false -- no error sounds
 vim.g.mapleader = " " -- space for leader
 vim.g.maplocalleader = " " -- space for localleader
 
--- better movement in wrapped text
-vim.keymap.set("n", "j", function()
-	return vim.v.count == 0 and "gj" or "j"
-end, { expr = true, silent = true, desc = "Down (wrap-aware)" })
-vim.keymap.set("n", "k", function()
-	return vim.v.count == 0 and "gk" or "k"
-end, { expr = true, silent = true, desc = "Up (wrap-aware)" })
+-- Bättre split-fönster
+vim.opt.splitbelow = true
+vim.opt.splitright = true
 
-vim.keymap.set("n", "<leader>c", ":nohlsearch<CR>", { desc = "Clear search highlights" })
 
-vim.keymap.set("n", "n", "nzzzv", { desc = "Next search result (centered)" })
-vim.keymap.set("n", "N", "Nzzzv", { desc = "Previous search result (centered)" })
-vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Half page down (centered)" })
-vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Half page up (centered)" })
+vim.pack.add({
+  { src = "https://github.com/folke/tokyonight.nvim" },
 
-vim.keymap.set("x", "<leader>p", '"_dP', { desc = "Paste without yanking" })
-vim.keymap.set({ "n", "v" }, "<leader>x", '"_d', { desc = "Delete without yanking" })
+  { 
+    src = "https://github.com/nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+  },
 
-vim.keymap.set("n", "<leader>bn", ":bnext<CR>", { desc = "Next buffer" })
-vim.keymap.set("n", "<leader>bp", ":bprevious<CR>", { desc = "Previous buffer" })
+  { 
+    src = "https://github.com/nvim-lualine/lualine.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
+})
 
-vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left window" })
-vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Move to bottom window" })
-vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Move to top window" })
-vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right window" })
+-- Ladda och konfigurera treesitter LAZY (efter att plugin laddats)
+vim.api.nvim_create_autocmd("User", {
+  pattern = "PackLoadPost",  -- triggas när vim.pack laddat plugins
+  callback = function()
+    -- Skydda mot att köras flera gånger
+    if vim.g.loaded_treesitter_setup then return end
+    vim.g.loaded_treesitter_setup = true
 
-vim.keymap.set("n", "<leader>sv", ":vsplit<CR>", { desc = "Split window vertically" })
-vim.keymap.set("n", "<leader>sh", ":split<CR>", { desc = "Split window horizontally" })
-vim.keymap.set("n", "<C-Up>", ":resize +2<CR>", { desc = "Increase window height" })
-vim.keymap.set("n", "<C-Down>", ":resize -2<CR>", { desc = "Decrease window height" })
-vim.keymap.set("n", "<C-Left>", ":vertical resize -2<CR>", { desc = "Decrease window width" })
-vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>", { desc = "Increase window width" })
+    local ok, configs = pcall(require, "nvim-treesitter.configs")
+    if not ok then
+      vim.notify("nvim-treesitter inte laddat än – försök igen eller kolla installation", vim.log.levels.WARN)
+      return
+    end
 
-vim.keymap.set("n", "<A-j>", ":m .+1<CR>==", { desc = "Move line down" })
-vim.keymap.set("n", "<A-k>", ":m .-2<CR>==", { desc = "Move line up" })
-vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
-vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
+    configs.setup {
+      ensure_installed = {
+        "html", "javascript", "css", "php", "python", "c_sharp", "yaml", "json",
+        "lua", "vim", "vimdoc", "markdown", "markdown_inline",
+      },
+      highlight = { enable = true },
+      indent = { enable = true },
+      incremental_selection = { enable = true },
+    }
 
-vim.keymap.set("v", "<", "<gv", { desc = "Indent left and reselect" })
-vim.keymap.set("v", ">", ">gv", { desc = "Indent right and reselect" })
+    -- Extra: trigga TSUpdate om det behövs
+    vim.cmd("TSUpdate")
+  end,
+  desc = "Setup nvim-treesitter efter vim.pack load",
+})
 
-vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines and keep cursor position" })
 
-vim.keymap.set("n", "<leader>pa", function() -- show file path
-	local path = vim.fn.expand("%:p")
-	vim.fn.setreg("+", path)
-	print("file:", path)
-end, { desc = "Copy full file path" })
+require("tokyonight").setup({
+  style = "night",                  -- Alternativ: "storm", "moon", "night", "day"
+                                    -- "night" är mörk och clean, många favoriter
+  transparent = false,              -- true = transparent bakgrund (bra i terminal)
+  styles = {
+    comments = { italic = true },   -- italic på kommentarer?
+    keywords = { italic = true },
+    functions = {},
+    variables = {},
+  },
+  sidebars = { "qf", "help", "terminal" },  -- vilka fönster ska ha transparent bg
+  on_colors = function(colors)
+  end,
+  on_highlights = function(hl, c)
+  end,
+})
 
-vim.keymap.set("n", "<leader>td", function()
-	vim.diagnostic.enable(not vim.diagnostic.is_enabled())
-end, { desc = "Toggle diagnostics" })
+
+-- Aktivera och konfigurera lualine
+require("lualine").setup {
+  options = {
+    icons_enabled = true,                    -- Kräver nvim-web-devicons för symboler
+    theme = "tokyonight",                    -- Använder ditt färgschema automatiskt
+    component_separators = { left = "|", right = "|" },
+    section_separators = { left = "", right = "" },  -- snygga pilar
+    disabled_filetypes = { "NvimTree", "packer", "startify" },  -- dölj i vissa fönster
+    always_divide_middle = true,
+    globalstatus = true,                     -- en statusline för alla fönster (bättre i tmux/split)
+  },
+  sections = {
+    lualine_a = { "mode" },
+    lualine_b = { "branch", "diff", "diagnostics" },
+    lualine_c = { "filename" },
+    lualine_x = { "encoding", "fileformat", "filetype" },
+    lualine_y = { "progress" },
+    lualine_z = { "location" }
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = { "filename" },
+    lualine_x = { "location" },
+    lualine_y = {},
+    lualine_z = {}
+  },
+  extensions = { "quickfix", "fugitive" }  -- extra stöd för vissa plugins
+}
+
+-- Aktivera schemat (efter setup!)
+vim.cmd("colorscheme tokyonight-night")
 
