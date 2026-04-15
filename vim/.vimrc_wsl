@@ -9,12 +9,20 @@ let mapleader = " "
 " Gör att Vim beter sig som modern Vim, inte 1970-tals vi.
 set nocompatible
 
+" Search down into subfolders
+" Provides tab-completion for all file-related tasks
+set path+=**
+
+" Display all matching files when we tab complete
+set wildmenu
+
 " ==========================
 " Syntax & filtyper
 " ==========================
 
 " Slår på syntaxhighlighting
 syntax on
+syntax enable
 
 " Aktiverar filtypsdetektering:
 " - laddar rätt inställningar per filtyp
