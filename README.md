@@ -41,6 +41,7 @@ vim --version
 ```
 
 #### Ubuntu WSL
+
 ```sh
 # Uppdate package list
 sudo apt update
@@ -56,41 +57,28 @@ vim --version
 
 When you have vim installed you will probably want to clone this repo into your ~/ folder, and then add symlinks to each dotfile.
 
-For example:
+```sh
+cd ~/
+git clone https://github.com/snailtail/.dotfiles
+```
+
+#### Vim config  
+
+Then symlink the config-files for vim:  
+
 ```sh
 cd ~/
 git clone https://github.com/snailtail/.dotfiles
 ln -s ~/.dotfiles/vim/.vimrc .vimrc
 ln -s ~/.dotfiles/vim ~/.vim
 
-# If you intend to use Neovim:
-mkdir -p ~/.config
-ln -sfn ~/.dotfiles/nvim ~/.config/nvim
 ```
-This should download the repo to your local client machine, and create symbolic links for some config files and/or directories for vim and neovim.  
+This should download the repo to your local client machine, and create symbolic links for some config files and/or directories for vim.
 
-To download the repo, and make a symbolic link to the .vimrc file from where vim most usually looks for it's config file.  
-This will also symlink the ~/.vim directory to the .dotfiles/vim folder, where there are some colorscheme files and other stuff.  
+#### Tmux config  
 
-
-### Installation of Neovim if needed 
-
-#### Ubuntu/WSL (apt)
+And if you use tmux (you probably should) you might want to create a symlink to the .tmux.conf file in the dotfiles, for some good base settings:  
 
 ```sh
-sudo apt update
-sudo apt install -y neovim 
+ln -s ~/.dotfiles/tmux/.tmux.conf ~/.tmux.conf
 ```
-
-#### Fedora (dnf)
-
-```sh
-sudo dnf install -y neovim 
-```
-
-#### macOS (brew)
-
-```sh
-brew install neovim 
-```
-

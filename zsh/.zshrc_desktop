@@ -6,6 +6,8 @@ export PATH="$HOME/.local/bin:$PATH"
 autoload -Uz compinit
 compinit
 
+# Bob stuff (neovim installer/version selector)
+source ~/.local/share/bob/env/env.sh
 # Start Starship
 eval "$(starship init zsh)"
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
