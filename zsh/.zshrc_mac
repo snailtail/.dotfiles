@@ -95,14 +95,6 @@ alias la="eza -la --icons"
 autoload -Uz compinit
 compinit
 
-# 2. kubectl completion
-source ~/.kubectl_completion
-
-alias k=kubectl
-complete -F __start_kubectl k
-alias k=kubectl
-compdef _kubectl k
-
 cd() {
   builtin cd "$@" || return
   if [ -f ".venv/bin/activate" ]; then
