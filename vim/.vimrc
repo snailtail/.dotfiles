@@ -57,7 +57,7 @@ filetype plugin indent on
 
 " Färgschema
 set termguicolors
-colorscheme gruvbox
+colorscheme evening
 set background=dark
 
 
