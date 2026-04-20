@@ -57,7 +57,7 @@ filetype plugin indent on
 
 " Färgschema
 set termguicolors
-colorscheme evening
+colorscheme habamax
 set background=dark
 
 
@@ -172,3 +172,20 @@ set spell
 " <title><title> tags
 nnoremap ,html :-1read $HOME/.vim/.skeleton.html<CR>3jwf>
 " slask
+" Urklipp
+
+if system('uname -r') =~ 'microsoft'
+    " WSL
+    set clipboard=unnamedplus
+    let g:clipboard = {
+      \ 'copy':  {'+': 'win32yank.exe -i --crlf', '*': 'win32yank.exe -i --crlf'},
+      \ 'paste': {'+': 'win32yank.exe -o --lf', '*': 'win32yank.exe -o --lf'},
+      \ }
+     " win32yank config...
+elseif system('uname') =~ 'Darwin'
+    " Mac
+    set clipboard=unnamed
+else
+    " Arch/Linux
+    set clipboard=unnamedplus
+endif
