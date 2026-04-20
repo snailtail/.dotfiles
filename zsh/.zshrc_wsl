@@ -1,40 +1,63 @@
+# Path to your Oh My Zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
+
 # Enable interactive comments (accept lines starting with # in interactive terminal without complaining)
 setopt interactivecomments
 
-# Lines configured by zsh-newuser-install
+# History settings
 HISTFILE=~/.histfile
 HISTSIZE=110000
 SAVEHIST=100000
-bindkey -e
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-zstyle :compinstall filename '/home/magnus/.zshrc'
 
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
 HIST_STAMPS="yyyy-mm-dd"
 
-
-# Preferred editor 
-export EDITOR='vim'
-
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
+# Set name of the theme to load
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="robbyrussell"
+zstyle ':omz:update' mode auto      # update automatically without asking
+zstyle ':omz:update' frequency 13
 plugins=(
   git
   zsh-autosuggestions
   zsh-syntax-highlighting
   )
-eval "$(starship init zsh)"
-alias ll="eza -l --icons"
-alias la="eza -l -a --icons"
+
+source $ZSH/oh-my-zsh.sh
+
+function zle-keymap-select {
+  if [[ $KEYMAP == vicmd ]]; then
+    echo -ne '\e[3 q'  # blinking underline cursor = normal mode
+  else
+    echo -ne '\e[2 q'  # block cursor = insert mode
+  fi
+}
+zle -N zle-keymap-select
+
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd v edit-command-line
+
+# Preferred editor 
+export EDITOR='vim'
+
+# Vi editing mode in zsh
+set -o vi
+
+# Just local bin stuff in the ~/ directory
+export PATH="$HOME/.local/bin/:$PATH"
+
 alias ls="eza --icons"
-alias gf="git fetch"
+alias ll="eza -l --icons"
+alias la="eza -la --icons"
 alias bat="batcat"
+
+# Git aliases
+alias gf="git fetch"
+alias gs="git status"
+
+## Alias för mounts mot DFS et
+alias mounttest='sudo mkdir -p /mnt/dfs/integration-test && sudo mount -t drvfs "\\\\kommun.skovde.se\\dfs\\Integration-test" /mnt/dfs/integration-test'
+alias mountprod='sudo mkdir -p /mnt/dfs/integration-prod && sudo mount -t drvfs "\\\\kommun.skovde.se\\dfs\\Integration-prod" /mnt/dfs/integration-prod'
 
 # 1. starta zsh completion
 autoload -Uz compinit
