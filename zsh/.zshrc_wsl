@@ -13,9 +13,40 @@ zstyle :compinstall filename '/home/magnus/.zshrc'
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
+HIST_STAMPS="yyyy-mm-dd"
+
+
+# Preferred editor 
+export EDITOR='vim'
+
+# Which plugins would you like to load?
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(
+  git
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+  )
 eval "$(starship init zsh)"
 alias ll="eza -l --icons"
 alias la="eza -l -a --icons"
 alias ls="eza --icons"
 alias gf="git fetch"
 alias bat="batcat"
+
+# 1. starta zsh completion
+autoload -Uz compinit
+compinit
+
+cd() {
+  builtin cd "$@" || return
+  if [ -f ".venv/bin/activate" ]; then
+    source ".venv/bin/activate"
+  fi
+  
+  if [ -f ".env/bin/activate" ]; then
+    source ".env/bin/activate"
+  fi
+}
