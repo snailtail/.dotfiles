@@ -75,6 +75,13 @@ set backspace=indent,eol,start
 " Always show the status line at the bottom, even if you only have one window
 " open
 set laststatus=2
+set statusline=
+set statusline+=\ %F
+set statusline+=\%= " separator
+set statusline+=\ FT:\ %Y
+set statusline+=\ BN:\ %n
+set statusline+=\ LN:\ %l
+
 " Förhindrar automatiskt radbrytning vid långa rader
 " Bra för kod, JSON, loggar mm.
 set nowrap
